@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo 1 vs 1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .character {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 200px;
+        }
+        button {
+            padding: 5px 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="character" id="player1">
+        <h2>Jogador 1</h2>
+        <p>Vida: <span id="life1">1000</span></p>
+        <p>Mana: <span id="mana1">20</span></p>
+        <button onclick="attack('player1')">Ataque</button>
+    </div>
+
+    <div class="character" id="player2">
+        <h2>Jogador 2</h2>
+        <p>Vida: <span id="life2">1000</span></p>
+        <p>Mana: <span id="mana2">20</span></p>
+        <button onclick="attack('player2')">Ataque</button>
+    </div>
+</div>
+
+<script>
+    function attack(player) {
+        const lifeElement = document.getElementById(`life${player.charAt(player.length - 1)}`);
+        const manaElement = document.getElementById(`mana${player.charAt(player.length - 1)}`);
+
+        let life = parseInt(lifeElement.innerText);
+        let mana = parseInt(manaElement.innerText);
+
+        if (mana >= 5) {
+            const damage = Math.floor(Math.random() * 100) + 1;
+            life -= damage;
+            mana -= 5;
+
+            lifeElement.innerText = life;
+            manaElement.innerText = mana;
+
+            alert(`Ataque bem-sucedido! ${damage} de dano causado.`);
+        } else {
+            alert('Mana insuficiente para atacar!');
+        }
+    }
+</script>
+
+</body>
+</html>
